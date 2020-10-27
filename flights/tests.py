@@ -1,6 +1,6 @@
 from django.test import Client, TestCase 
 from .models import *
-from django.db.models import MAX
+from django.db.models import Max
 
 # Create your tests here.
 class FlightTestCase(TestCase):
@@ -59,7 +59,7 @@ class FlightTestCase(TestCase):
 		self.assertEqual(response.status_code, 200)
 
 	def test_invalid_flight_page(self):
-		max_id = Flight.objects.all().aggregate(MAX("id"))["id_max"]
+		max_id = Flight.objects.all().aggregate(Max("id"))["id_max"]
 
 		c = Client()
 		response = c.get(f"/flights/{max_id + 1}")
